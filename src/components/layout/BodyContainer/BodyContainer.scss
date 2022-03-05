@@ -1,0 +1,7 @@
+@import '../../../assets/styles/variables.scss';
+
+.BodyContainer {
+    display: block;
+    margin: 0 auto;
+    max-width: $max-width;
+}

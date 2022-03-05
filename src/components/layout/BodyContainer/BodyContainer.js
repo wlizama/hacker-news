@@ -1,8 +1,11 @@
 import React from 'react'
+import './BodyContainer.scss'
 
 const BodyContainer = ({ children }) => {
     return (
-        <div>{children}</div>
+        <section className='BodyContainer'>
+            {children}
+        </section>
     )
 }
 
