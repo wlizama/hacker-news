@@ -1,5 +1,7 @@
 import React from 'react'
 import NewsItem from './NewsItem'
+import './NewsList.scss'
+
 const NewsList = (props) => {
 
     const { news, onNewsClick } = props

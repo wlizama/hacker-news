@@ -32,6 +32,7 @@ const DropdownWithIcon = (props) => {
             >
                 <span>{selected.name}</span>
                 <img 
+                    alt='Arrow down'
                     src={imgArrowDown}
                 />
             </div>
@@ -41,7 +42,7 @@ const DropdownWithIcon = (props) => {
                 options.map((option, index) => (
                 <li 
                     key={index}
-                    value={option.name}
+                    value={option.value}
                     onClick={(evt) => setSelectedOption(option)}
                     className='DropdownWithIcon__list-item'
                 >
