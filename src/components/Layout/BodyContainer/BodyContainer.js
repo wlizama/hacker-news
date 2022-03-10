@@ -3,9 +3,9 @@ import './BodyContainer.scss'
 
 const BodyContainer = ({ children }) => {
     return (
-        <section className='BodyContainer'>
+        <main className='BodyContainer'>
             {children}
-        </section>
+        </main>
     )
 }
 

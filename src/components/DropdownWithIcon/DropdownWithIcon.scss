@@ -1,0 +1,49 @@
+.DropdownWithIcon {
+    background-color: #fff;
+    width: 240px;
+    text-align: left;
+}
+
+.DropdownWithIcon__container {
+    // padding: 5px 12px 5px 12px;
+    border-radius: 4px;
+    border: solid 1px #2e2e2e;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+
+    img {
+        height: 15px;
+    }
+}
+
+.DropdownWithIcon__list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: none;
+    margin: 0 0 0 1px;
+    box-shadow: 0 2px 2px 0 #dad8d8;
+
+    &.DropdownWithIcon__list--open {
+        display: block;
+    }
+}
+
+.DropdownWithIcon__list-item {
+    cursor: pointer;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    padding: 12px;
+
+    img {
+        margin-right: 10px;
+    }
+
+    &:hover {
+        background-color: #eaeaea;
+    }
+}

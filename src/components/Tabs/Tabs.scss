@@ -1,0 +1,41 @@
+@import '../../assets/styles/variables.scss';
+
+.Tabs {
+    width: 100%;
+    text-align: center;
+}
+
+.Tabs__buttons {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.Tabs__button {
+    width: 98px;
+    height: 31px;
+    border-radius: 2px;
+    border: solid 1px #d6d6d6;
+    vertical-align: top;
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.75;
+    letter-spacing: normal;
+    color: #606060;
+    cursor: pointer;
+
+    &.Tabs__button--active {
+        border: solid 1px $azure-color;
+        color: $azure-color;
+    }
+}
+
+.Tab__content {
+    margin: 2em 0;
+}

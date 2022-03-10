@@ -1,13 +1,16 @@
 import React from 'react'
-import Layout from './components/layout'
+import Layout from './components/Layout'
 import Home from './views/Home'
+import MainContext from './context/MainContext'
 import './assets/styles/general.scss'
 
 const App = () => {
     return (
-        <Layout>
-            <Home />
-        </Layout>
+        <MainContext>
+            <Layout>
+                <Home />
+            </Layout>
+        </MainContext>
     )
 }
 
