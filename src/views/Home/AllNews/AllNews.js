@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import DropdownWithIcon from '../../../components/DropdownWithIcon'
+import Pagination from '../../../components/Pagination'
 import NewsList from '../../../components/NewsList'
 
 import imgAngular138 from '../../../assets/images/angular-138.png'
@@ -16,7 +17,10 @@ const AllNews = () => {
 
     const [news, setNews] = useState([])
     const [query, setQuery] = useState('')
+    const [currentPage, setCurrentPage] = useState(1)
+    const [nbHits, setNbHits] = useState(0)
 
+    const hitsPerPage = 20;
     const NewsItemList = [
         {
             name: 'Angular', value: 'angularjs', defaultImage: imgAngular138, image2x: imgAngular138_2x, image3x: imgAngular138_3x
@@ -29,17 +33,23 @@ const AllNews = () => {
         },
     ]
 
+    const handleChangeQuery = (selectedOption) => {
+        setQuery(selectedOption.value)
+        setCurrentPage(1)
+    }
+
     useEffect(() => {
 
         const fetchNews = async () => {
-            const response = await fetch(`https://hn.algolia.com/api/v1/search_by_date?query=${query}&page=0`);
+            const response = await fetch(`https://hn.algolia.com/api/v1/search_by_date?query=${query}&page=${currentPage}`);
             const data = await response.json()
             setNews(data.hits)
+            setNbHits(data.nbHits)
         }
 
         fetchNews()
         
-    }, [query])
+    }, [query, currentPage])
 
     return (
         <>
@@ -47,11 +57,19 @@ const AllNews = () => {
                 <DropdownWithIcon 
                     options={NewsItemList}
                     defaultOption={NewsItemList[0]}
-                    onChange={(selectedOption) => setQuery(selectedOption.value)}
+                    onChange={handleChangeQuery}
                 />
             </div>
             <div>
                 <NewsList news={news} onNewsClick={() => console.log("nada por ahora")} />
+            </div>
+            <div>
+                <Pagination
+                    currentPage={currentPage}
+                    totalCount={nbHits}
+                    pageSize={hitsPerPage}
+                    onPageChange={page => setCurrentPage(page)}
+                />
             </div>
         </>
     )

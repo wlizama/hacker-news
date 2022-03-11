@@ -45,11 +45,12 @@ const NewsItem = ({ item, onClick }) => {
     }
 
     return (
-        <li className='NewsList--item'>
+        <li className='NewsList__item'>
             <a 
                 href={item.story_url}
                 target='_blank'
-                className='NewsList--item-link'
+                rel="noreferrer"
+                className='NewsList__item-link'
             >
                 <small>
                     <img 
@@ -62,7 +63,7 @@ const NewsItem = ({ item, onClick }) => {
             </a>
             <button
                 onClick={onClick}
-                className='NewsList--item-btn'
+                className='NewsList__item-btn'
             >
                 <img 
                     src={imgFavorite2}

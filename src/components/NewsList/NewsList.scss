@@ -7,7 +7,7 @@
     justify-content: center;
 }
 
-.NewsList--item {
+.NewsList__item {
     display: flex;
     margin: 15px 20px;
     padding: 0;
@@ -18,10 +18,15 @@
     text-align: left;
     vertical-align: top;
     opacity: 0.8;
+    transition: .5s all;
+
+    &:hover {
+        opacity: 0.4;
+    }
 
 }
 
-.NewsList--item-link {
+.NewsList__item-link {
     padding: 14px 16px 14px 26px;
     display: block;
     height: auto;
@@ -60,7 +65,7 @@
     }
 }
 
-.NewsList--item-btn {
+.NewsList__item-btn {
     border: 1px solid transparent;
     border-top-right-radius: inherit;
     border-bottom-right-radius: inherit;
