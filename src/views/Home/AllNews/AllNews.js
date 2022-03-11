@@ -38,6 +38,16 @@ const AllNews = () => {
         setCurrentPage(1)
     }
 
+    const toggleFavorite = (item) => {
+        setNews(news.map(newsItem => {
+            if (newsItem.objectID === item.objectID) {
+                newsItem.isFavorite = !newsItem.isFavorite
+                console.log(newsItem.isFavorite)
+            }
+            return newsItem
+        }))
+    }
+
     useEffect(() => {
 
         const fetchNews = async () => {
@@ -58,7 +68,7 @@ const AllNews = () => {
                 defaultOption={NewsItemList[0]}
                 onChange={handleChangeQuery}
             />
-            <NewsList news={news} onNewsClick={() => console.log("nada por ahora")} />
+            <NewsList news={news} onNewsClick={toggleFavorite} />
             <Pagination
                 className="full-width-center"
                 currentPage={currentPage}

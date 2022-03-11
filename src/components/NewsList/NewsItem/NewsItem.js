@@ -65,10 +65,17 @@ const NewsItem = ({ item, onClick }) => {
                 onClick={onClick}
                 className='NewsList__item-btn'
             >
-                <img 
+                {item.isFavorite ? (
+                    <img 
+                    src={imgFavorite3}
+                    srcSet={`${imgFavorite3_2x} 2x, ${imgFavorite3_3x} 3x`}
+                />
+                ) : (
+                    <img 
                     src={imgFavorite2}
                     srcSet={`${imgFavorite2_2x} 2x, ${imgFavorite2_3x} 3x`}
-                />
+                /> 
+                )}
             </button>
         </li>
     )
