@@ -53,24 +53,19 @@ const AllNews = () => {
 
     return (
         <>
-            <div>
-                <DropdownWithIcon 
-                    options={NewsItemList}
-                    defaultOption={NewsItemList[0]}
-                    onChange={handleChangeQuery}
-                />
-            </div>
-            <div>
-                <NewsList news={news} onNewsClick={() => console.log("nada por ahora")} />
-            </div>
-            <div>
-                <Pagination
-                    currentPage={currentPage}
-                    totalCount={nbHits}
-                    pageSize={hitsPerPage}
-                    onPageChange={page => setCurrentPage(page)}
-                />
-            </div>
+            <DropdownWithIcon 
+                options={NewsItemList}
+                defaultOption={NewsItemList[0]}
+                onChange={handleChangeQuery}
+            />
+            <NewsList news={news} onNewsClick={() => console.log("nada por ahora")} />
+            <Pagination
+                className="full-width-center"
+                currentPage={currentPage}
+                totalCount={nbHits}
+                pageSize={hitsPerPage}
+                onPageChange={page => setCurrentPage(page)}
+            />
         </>
     )
 }

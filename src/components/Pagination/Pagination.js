@@ -9,7 +9,7 @@ const Pagination = props => {
         siblingCount = 1,
         currentPage,
         pageSize,
-        ...rest
+        className
     } = props;
 
     const paginationRange = usePagination(
@@ -30,7 +30,7 @@ const Pagination = props => {
 
     let lastPage = paginationRange[paginationRange.length - 1];
     return (
-        <ul className='Pagination' {...rest}>
+        <ul className={`Pagination ${className ? className : ''}`}>
             <li
                 className={`Pagination__item ${currentPage === 1 ? 'Pagination__item--disabled' : ''}`}
                 onClick={onPrevious}>

@@ -1,15 +1,19 @@
+@import '../../assets/styles/variables.scss';
+
 .NewsList {
     margin: 0;
     padding: 0;
     list-style: none;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-between;
+    margin-top: 38px;
+    margin-bottom: 96px;
 }
 
 .NewsList__item {
     display: flex;
-    margin: 15px 20px;
+    margin-bottom: 30px;
     padding: 0;
     border-radius: 6px;
     border: solid 1px #979797;
@@ -72,4 +76,10 @@
     padding: 10px;
     cursor: pointer;
     width: 68px;
+}
+
+@media screen and (max-width: $max-width) {
+    .NewsList__item {
+        width: 100%;
+    }
 }
