@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+import { MainContext, ACTIONS } from '../../../context/MainContext'
 import DropdownWithIcon from '../../../components/DropdownWithIcon'
 import Pagination from '../../../components/Pagination'
 import NewsList from '../../../components/NewsList'
@@ -15,8 +16,10 @@ import imgVue141_3x from '../../../assets/images/vue-141@3x.png'
 
 const AllNews = () => {
 
+	const { globalDispatch, globalState } = useContext(MainContext)
+
     const [news, setNews] = useState([])
-    const [query, setQuery] = useState('')
+    const [query, setQuery] = useState(globalState.selectedFilter)
     const [currentPage, setCurrentPage] = useState(1)
     const [nbHits, setNbHits] = useState(0)
 
@@ -33,6 +36,8 @@ const AllNews = () => {
         },
     ]
 
+    const defaultOption = NewsItemList.find(item => item.value === query)
+
     const handleChangeQuery = (selectedOption) => {
         setQuery(selectedOption.value)
         setCurrentPage(1)
@@ -42,7 +47,11 @@ const AllNews = () => {
         setNews(news.map(newsItem => {
             if (newsItem.objectID === item.objectID) {
                 newsItem.isFavorite = !newsItem.isFavorite
-                console.log(newsItem.isFavorite)
+                
+                globalDispatch({
+                    type: newsItem.isFavorite ?  ACTIONS.FAVORITES_ADD : ACTIONS.FAVORITES_REMOVE,
+                    payload: newsItem
+                })
             }
             return newsItem
         }))
@@ -50,14 +59,23 @@ const AllNews = () => {
 
     useEffect(() => {
 
-        const fetchNews = async () => {
-            const response = await fetch(`https://hn.algolia.com/api/v1/search_by_date?query=${query}&page=${currentPage}`);
-            const data = await response.json()
-            setNews(data.hits)
-            setNbHits(data.nbHits)
-        }
+        if (query != '') {
+            const fetchNews = async () => {
+                const response = await fetch(`https://hn.algolia.com/api/v1/search_by_date?query=${query}&page=${currentPage}`);
+                const data = await response.json()
+                setNews(data.hits.map(item => {
+                    item.isFavorite = globalState.favoritedPosts.some(favoritedItem => favoritedItem.objectID === item.objectID)
+                    return item
+                }))
+                setNbHits(data.nbHits)
+            }
+            globalDispatch({
+                type: ACTIONS.FILTER_UPDATE,
+                payload: query
+            })
 
-        fetchNews()
+            fetchNews()
+        }
         
     }, [query, currentPage])
 
@@ -65,7 +83,7 @@ const AllNews = () => {
         <>
             <DropdownWithIcon 
                 options={NewsItemList}
-                defaultOption={NewsItemList[0]}
+                defaultOption={defaultOption}
                 onChange={handleChangeQuery}
             />
             <NewsList news={news} onNewsClick={toggleFavorite} />

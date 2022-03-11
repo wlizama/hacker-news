@@ -6,8 +6,10 @@ export const MainProvider = MainContext.Provider
 export const MainConsumer = MainContext.Consumer
 
 // action types
-export const AUTH_TYPES = {
-	
+export const ACTIONS = {
+	FAVORITES_ADD: 'FAVORITES/ADD',
+	FAVORITES_REMOVE: 'FAVORITES/REMOVE',
+	FILTER_UPDATE: 'FILTER/UPDATE',
 }
 
 // initial state
@@ -19,10 +21,20 @@ export const defaultState = {
 const reducer = ( state = defaultState, action ) => {
 
     switch (action.type) {
-		case AUTH_TYPES.LOGIN_OK:
+		case ACTIONS.FILTER_UPDATE:
             return {
 				...state,
-				auth: action.payload
+				selectedFilter: action.payload
+			}
+		case ACTIONS.FAVORITES_ADD:
+            return {
+				...state,
+				favoritedPosts: [...state.favoritedPosts, action.payload]
+			}
+		case ACTIONS.FAVORITES_REMOVE:
+			return {
+				...state,
+				favoritedPosts: state.favoritedPosts.filter(item => item.objectID !== action.payload.objectID)
 			}
         default:
             return state
