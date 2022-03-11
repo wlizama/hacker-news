@@ -17,12 +17,7 @@ import imgVue141_3x from '../../../assets/images/vue-141@3x.png'
 const AllNews = () => {
 
 	const { globalDispatch, globalState } = useContext(MainContext)
-
-    const [news, setNews] = useState([])
-    const [query, setQuery] = useState(globalState.selectedFilter)
-    const [currentPage, setCurrentPage] = useState(1)
-    const [nbHits, setNbHits] = useState(0)
-
+    
     const hitsPerPage = 20;
     const NewsItemList = [
         {
@@ -36,7 +31,13 @@ const AllNews = () => {
         },
     ]
 
-    const defaultOption = NewsItemList.find(item => item.value === query)
+    const [news, setNews] = useState([])
+    const [query, setQuery] = useState(globalState.selectedFilter || NewsItemList[0].value)
+    const [currentPage, setCurrentPage] = useState(1)
+    const [nbHits, setNbHits] = useState(0)
+
+
+    const defaultOption = NewsItemList.find(item => item.value === query) || NewsItemList[0]
 
     const handleChangeQuery = (selectedOption) => {
         setQuery(selectedOption.value)
@@ -59,7 +60,7 @@ const AllNews = () => {
 
     useEffect(() => {
 
-        if (query != '') {
+        if (query !== '') {
             const fetchNews = async () => {
                 const response = await fetch(`https://hn.algolia.com/api/v1/search_by_date?query=${query}&page=${currentPage}`);
                 const data = await response.json()

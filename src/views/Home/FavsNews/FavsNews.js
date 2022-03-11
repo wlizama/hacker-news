@@ -14,7 +14,7 @@ const FavsNews = () => {
     useEffect(() => {
         const favsPaginaded = favoritedPosts.slice((currentPage - 1) * hitsPerPage, currentPage * hitsPerPage)
         setFavNews(favsPaginaded)
-    }, [currentPage])
+    }, [currentPage, favoritedPosts])
 
     return (
         <>
